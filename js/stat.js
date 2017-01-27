@@ -15,8 +15,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 40);
   ctx.fillText('Список результатов:', 120, 60);
 
-// Отрисовать гистограмму:
-
   var histoWidth = 40;
   var histoHeightMax = 150;
   var histoXMin = 155;
@@ -45,6 +43,7 @@ window.renderStatistics = function (ctx, names, times) {
 
     ctx.fillStyle = 'hsla(0, 0%, 0%, 1)';
     ctx.fillText(names[i], histoX, 260);
+    ctx.fillText(time, histoX, histoY - 10);
 
   }
 
