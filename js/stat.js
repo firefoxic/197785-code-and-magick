@@ -23,7 +23,6 @@ window.renderStatistics = function (ctx, names, times) {
   var histoYMin = 90;
   var histoStep = 90;
   var timeMax = 0;
-  var histoColor = 'hsla(0, 100%, 50%, 1)';
 
   for (var i = 0; i < times.length; i++) {
     if (times[i] > timeMax) {
@@ -39,10 +38,7 @@ window.renderStatistics = function (ctx, names, times) {
     var histoHeight = parseInt(time / timePerPixel, 10);
     var histoX = histoXMin + histoStep * i;
     var histoY = histoYMin + histoHeightMax - histoHeight;
-
-    if (i > 0) {
-      histoColor = 'hsla(240, ' + 100 * Math.random() + '%, 50%, 1)';
-    }
+    var histoColor = names[i] === 'Вы' ? 'hsla(0, 100%, 50%, 1)' : 'hsla(240, ' + 100 * Math.random() + '%, 50%, 1)';
 
     ctx.fillStyle = histoColor;
     ctx.fillRect(histoX, histoY, histoWidth, histoHeight);
