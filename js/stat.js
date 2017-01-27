@@ -47,6 +47,8 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = histoColor;
     ctx.fillRect(histoX, histoY, histoWidth, histoHeight);
 
+    ctx.fillText(names[i], histoX, 260);
+
   }
 
 };
