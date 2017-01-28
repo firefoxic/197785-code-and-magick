@@ -27,3 +27,17 @@ wizard.addEventListener('click', function () {
   var colorNumber = Math.floor(Math.random() * wizardCoatColors.length);
   wizardCoat.style.fill = wizardCoatColors[colorNumber];
 });
+
+var wizardEyes = wizard.querySelector('#wizard-eyes');
+var wizardEyesColors = [
+  'black',
+  'red',
+  'blue',
+  'yellow',
+  'green'
+];
+
+wizardEyes.addEventListener('click', function () {
+  var colorNumber = Math.floor(Math.random() * wizardEyesColors.length);
+  wizardEyes.style.fill = wizardEyesColors[colorNumber];
+});
