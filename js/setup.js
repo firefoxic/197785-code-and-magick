@@ -1,8 +1,14 @@
 'use strict';
 
+var ENTER_KEY_CODE = 13;
+var SPACE_KEY_CODE = 32;
+var ESCAPE_KEY_CODE = 27;
+
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+var setupUserName = setup.querySelector('.setup-user-name');
+var setupSubmit = setup.querySelector('.setup-submit');
 
 var wizardCoat = {
   element: setup.querySelector('#wizard-coat'),
@@ -44,7 +50,7 @@ var getRandomElement = function (array) {
 };
 
 var changeColor = function (item) {
-  item.element.addEventListener('click', function (event) {
+  item.element.addEventListener('click', function () {
     item.element.setAttribute('fill', getRandomElement(item.colors));
   });
 };
@@ -53,10 +59,34 @@ changeColor(wizardCoat);
 changeColor(wizardEyes);
 changeColor(fireball);
 
-setupOpen.addEventListener('click', function () {
-  setup.classList.remove('invisible');
-});
+var isActivateEvent = function (event) {
+  return event.type === 'click' || event.keyCode && event.keyCode === ENTER_KEY_CODE || event.keyCode === SPACE_KEY_CODE;
+};
 
-setupClose.addEventListener('click', function () {
-  setup.classList.add('invisible');
-});
+var setupKeydownHandler = function (event) {
+  if (event.target !== setupUserName && event.keyCode === ESCAPE_KEY_CODE) {
+    setup.classList.add('invisible');
+    event.preventDefault();
+  }
+};
+
+var showSetup = function (event) {
+  if (isActivateEvent(event)) {
+    setup.classList.remove('invisible');
+    document.addEventListener('keydown', setupKeydownHandler);
+  }
+};
+
+var hideSetup = function (event) {
+  if (isActivateEvent(event)) {
+    setup.classList.add('invisible');
+    document.removeEventListener('keydown', setupKeydownHandler);
+  }
+};
+
+setupOpen.addEventListener('click', showSetup);
+setupOpen.addEventListener('keydown', showSetup);
+setupClose.addEventListener('click', hideSetup);
+setupClose.addEventListener('keydown', hideSetup);
+setupSubmit.addEventListener('click', hideSetup);
+setupSubmit.addEventListener('keydown', hideSetup);
