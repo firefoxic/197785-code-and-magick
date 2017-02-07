@@ -4,8 +4,19 @@ var ENTER_KEY_CODE = 13;
 var SPACE_KEY_CODE = 32;
 var ESCAPE_KEY_CODE = 27;
 
+var eventTypes = {
+  down: [
+    'mousedown',
+    'keydown'
+  ],
+  up: [
+    'mouseup',
+    'keyup'
+  ]
+};
+
 var setup = document.querySelector('.setup');
-var setupOpen = document.querySelector('.setup-open');
+var setupOpen = document.querySelector('.setup-open-icon');
 var setupClose = setup.querySelector('.setup-close');
 var setupUserName = setup.querySelector('.setup-user-name');
 var setupSubmit = setup.querySelector('.setup-submit');
@@ -60,7 +71,7 @@ changeColor(wizardEyes);
 changeColor(fireball);
 
 var isActivateEvent = function (event) {
-  return event.type === 'click' || event.keyCode && event.keyCode === ENTER_KEY_CODE || event.keyCode === SPACE_KEY_CODE;
+  return event.type === 'mouseup' || event.keyCode && event.keyCode === ENTER_KEY_CODE || event.keyCode === SPACE_KEY_CODE;
 };
 
 var setupKeydownHandler = function (event) {
@@ -84,9 +95,20 @@ var hideSetup = function (event) {
   }
 };
 
-setupOpen.addEventListener('click', showSetup);
-setupOpen.addEventListener('keydown', showSetup);
-setupClose.addEventListener('click', hideSetup);
-setupClose.addEventListener('keydown', hideSetup);
-setupSubmit.addEventListener('click', hideSetup);
-setupSubmit.addEventListener('keydown', hideSetup);
+var addActionToElement = function (element, action) {
+  for (var i = 0; i < eventTypes.up.length; i++) {
+    element.addEventListener(eventTypes.up[i], action);
+    element.addEventListener(eventTypes.up[i], function () {
+      element.setAttribute('aria-pressed', 'false');
+    });
+  }
+  for (i = 0; i < eventTypes.down.length; i++) {
+    element.addEventListener(eventTypes.down[i], function () {
+      element.setAttribute('aria-pressed', 'true');
+    });
+  }
+};
+
+addActionToElement(setupOpen, showSetup);
+addActionToElement(setupClose, hideSetup);
+addActionToElement(setupSubmit, hideSetup);
