@@ -101,3 +101,7 @@ var addActionToElement = function (element, action) {
 addActionToElement(setupOpen, showSetup);
 addActionToElement(setupClose, hideSetup);
 addActionToElement(setupSubmit, hideSetup);
+
+// TODO: Доработать разметку проекта и код модулей таким образом, чтобы повысить их доступность:
+// TODO:    1. Добавить свойство tabindex и соответствующие ARIA-роли и свойства элементам #wizard-coat, #wizard-eyes и .fireball-wrap
+// TODO:    2. Сделать так, чтобы ранее созданная функция changeColor добавляла обработчик изменения цвета не только по клику, но и по нажатию на кнопку Enter при установленном фокусе на соответствующий элемент.
