@@ -55,19 +55,9 @@ var fireball = {
   ]
 };
 
-var changeColor = function (item) {
-  var currentColor = item.element.getAttribute('fill');
-  var getNewColor = function () {
-    var newColor = window.utils.getRandomElementExcept(item.colors, currentColor);
-    item.element.setAttribute('fill', newColor);
-    currentColor = newColor;
-  };
-  item.element.addEventListener('click', getNewColor);
-};
-
-changeColor(wizardCoat);
-changeColor(wizardEyes);
-changeColor(fireball);
+window.changeColor(wizardCoat);
+window.changeColor(wizardEyes);
+window.changeColor(fireball);
 
 var isActivateEvent = function (event) {
   return event.type === 'mouseup' || event.keyCode && event.keyCode === ENTER_KEY_CODE || event.keyCode === SPACE_KEY_CODE;
