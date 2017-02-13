@@ -24,46 +24,45 @@ var setupSubmit = setup.querySelector('.setup-submit');
 var wizardCoat = {
   element: setup.querySelector('#wizard-coat'),
   colors: [
-    'rgb(101, 137, 164)',
-    'rgb(241, 43, 107)',
-    'rgb(146, 100, 161)',
-    'rgb(56, 159, 117)',
-    'rgb(215, 210, 55)',
-    'rgb(0, 0, 0)'
+    '#6589a4',
+    '#f12b6b',
+    '#9264a1',
+    '#389f75',
+    '#d7d237',
+    '#000000'
   ]
 };
 
 var wizardEyes = {
   element: setup.querySelector('#wizard-eyes'),
   colors: [
-    'rgb(0, 0, 0)',
-    'rgb(255, 0, 0)',
-    'rgb(0, 0, 255)',
-    'rgb(255, 255, 0)',
-    'rgb(0, 128, 0)'
+    '#000000',
+    '#ff0000',
+    '#0000ff',
+    '#ffff00',
+    '#008000'
   ]
 };
 
 var fireball = {
   element: setup.querySelector('.setup-fireball'),
   colors: [
-    'rgb(238, 72, 48)',
-    'rgb(48, 168, 238)',
-    'rgb(92, 230, 192)',
-    'rgb(232, 72, 213)',
-    'rgb(230, 232, 72)'
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
   ]
 };
 
-var getRandomElement = function (array) {
-  var randomElementIndex = Math.floor(Math.random() * array.length);
-  return array[randomElementIndex];
-};
-
 var changeColor = function (item) {
-  item.element.addEventListener('click', function () {
-    item.element.setAttribute('fill', getRandomElement(item.colors));
-  });
+  var currentColor = item.element.getAttribute('fill');
+  var getNewColor = function () {
+    var newColor = window.utils.getRandomElementExcept(item.colors, currentColor);
+    item.element.setAttribute('fill', newColor);
+    currentColor = newColor;
+  };
+  item.element.addEventListener('click', getNewColor);
 };
 
 changeColor(wizardCoat);
