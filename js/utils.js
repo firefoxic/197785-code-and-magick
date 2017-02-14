@@ -1,15 +1,21 @@
 'use strict';
 
-window.utils = {
-  getRandomElement: function (array) {
+window.utils = (function () {
+
+  var getRandomElement = function (array) {
     var randomElementIndex = Math.floor(Math.random() * array.length);
     return array[randomElementIndex];
-  },
-  getRandomElementExcept: function (array, currentElement) {
-    var newElement = currentElement;
-    while (newElement === currentElement) {
-      newElement = window.utils.getRandomElement(array);
+  };
+
+  return {
+    getRandomElement: getRandomElement,
+    getRandomElementExcept: function (array, currentElement) {
+      var newElement = currentElement;
+      while (newElement === currentElement) {
+        newElement = getRandomElement(array);
+      }
+      return newElement;
     }
-    return newElement;
-  }
-};
+  };
+
+})();
